@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>WebScope Example</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+			min-height: 100vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 20px;
+		}
+
+		.container {
+			background: white;
+			border-radius: 12px;
+			box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+			max-width: 600px;
+			width: 100%;
+			padding: 40px;
+		}
+
+		h1 {
+			color: #333;
+			margin-bottom: 16px;
+			font-size: 32px;
+		}
+
+		.subtitle {
+			color: #666;
+			font-size: 14px;
+			margin-bottom: 24px;
+		}
+
+		p {
+			color: #555;
+			line-height: 1.6;
+			margin-bottom: 16px;
+		}
+
+		.features {
+			list-style: none;
+			margin: 24px 0;
+		}
+
+		.features li {
+			padding: 12px 0;
+			padding-left: 32px;
+			position: relative;
+			color: #555;
+			line-height: 1.6;
+		}
+
+		.features li:before {
+			content: "✓";
+			position: absolute;
+			left: 0;
+			color: #667eea;
+			font-weight: bold;
+			font-size: 18px;
+		}
+
+		.code-block {
+			background: #f5f5f5;
+			border-left: 4px solid #667eea;
+			padding: 16px;
+			margin: 24px 0;
+			border-radius: 4px;
+			font-family: 'Monaco', 'Courier New', monospace;
+			font-size: 13px;
+			overflow-x: auto;
+			color: #333;
+		}
+
+		.demo-section {
+			margin-top: 32px;
+			padding-top: 32px;
+			border-top: 1px solid #eee;
+		}
+
+		.demo-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+			gap: 16px;
+			margin: 24px 0;
+		}
+
+		.demo-card {
+			background: #f9f9f9;
+			padding: 16px;
+			border-radius: 8px;
+			border: 1px solid #e0e0e0;
+			text-align: center;
+			cursor: pointer;
+			transition: all 0.3s ease;
+		}
+
+		.demo-card:hover {
+			border-color: #667eea;
+			background: #f0f0ff;
+			transform: translateY(-2px);
+			box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+		}
+
+		.demo-card h3 {
+			font-size: 14px;
+			color: #333;
+			margin-bottom: 8px;
+		}
+
+		.demo-card p {
+			font-size: 12px;
+			color: #999;
+			margin: 0;
+		}
+
+		button {
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+			color: white;
+			border: none;
+			padding: 12px 24px;
+			border-radius: 6px;
+			font-size: 14px;
+			cursor: pointer;
+			transition: transform 0.2s;
+		}
+
+		button:hover {
+			transform: translateY(-2px);
+		}
+
+		button:active {
+			transform: translateY(0);
+		}
+
+		.status {
+			margin-top: 16px;
+			padding: 12px;
+			background: #e8f5e9;
+			border: 1px solid #4caf50;
+			border-radius: 6px;
+			color: #2e7d32;
+			display: none;
+		}
+
+		.status.show {
+			display: block;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>🌐 WebScope Preview</h1>
+		<p class="subtitle">VS Code Web Preview Extension - Example Page</p>
+
+		<p>Welcome to WebScope! This example demonstrates the capabilities of the VS Code web preview extension. You can use this file to test the extension's features.</p>
+
+		<h2 style="font-size: 18px; color: #333; margin: 24px 0 16px 0;">Features</h2>
+		<ul class="features">
+			<li>Preview any URL directly in VS Code</li>
+			<li>Load local HTML files with file system access</li>
+			<li>Navigate with back button and history tracking</li>
+			<li>Reload button to refresh the preview</li>
+			<li>File dialog to easily select files</li>
+			<li>Secure iframe sandbox environment</li>
+			<li>Maintains panel state when switching tabs</li>
+		</ul>
+
+		<h2 style="font-size: 18px; color: #333; margin: 24px 0 16px 0;">Try It Out</h2>
+		<p>Click the button below to interact with the preview:</p>
+
+		<div class="demo-grid">
+			<div class="demo-card" onclick="handleCardClick('DOM')">
+				<h3>🎯 DOM</h3>
+				<p>Interact with the DOM</p>
+			</div>
+			<div class="demo-card" onclick="handleCardClick('Events')">
+				<h3>📡 Events</h3>
+				<p>JavaScript events work</p>
+			</div>
+			<div class="demo-card" onclick="handleCardClick('Styles')">
+				<h3>🎨 Styles</h3>
+				<p>CSS styling enabled</p>
+			</div>
+		</div>
+
+		<button onclick="testButton()">Click Me!</button>
+		<div id="status" class="status"></div>
+
+		<div class="demo-section">
+			<h2 style="font-size: 18px; color: #333; margin-bottom: 16px;">How to Use</h2>
+			<ol style="padding-left: 24px; color: #555; line-height: 1.8;">
+				<li>Use the toolbar to navigate and control the preview</li>
+				<li>Enter any URL in the input field and click "Load"</li>
+				<li>Use the "Back" button to navigate through history</li>
+				<li>Click "Reload" to refresh the current page</li>
+				<li>Click "Open File" to select a different HTML file</li>
+			</ol>
+		</div>
+
+		<div class="code-block">
+// Example: Using WebScope
+// 1. Open Command Palette (Cmd+Shift+P)
+// 2. Search for "WebScope: Open Web Preview"
+// 3. Enter a URL or file path
+// 4. Start previewing!
+		</div>
+
+		<p style="margin-top: 32px; padding-top: 24px; border-top: 1px solid #eee; color: #999; font-size: 12px;">
+			WebScope Extension • Built for VS Code
+		</p>
+	</div>
+
+	<script>
+		function testButton() {
+			const status = document.getElementById('status');
+			status.textContent = '✓ Button clicked! JavaScript is working correctly.';
+			status.classList.add('show');
+			setTimeout(() => {
+				status.classList.remove('show');
+			}, 3000);
+		}
+
+		function handleCardClick(name) {
+			const status = document.getElementById('status');
+			status.textContent = `✓ Clicked: ${name} card - Event handling is working!`;
+			status.classList.add('show');
+			setTimeout(() => {
+				status.classList.remove('show');
+			}, 3000);
+		}
+
+		// Log to console for debugging
+		console.log('WebScope example page loaded');
+	</script>
+</body>
+</html>

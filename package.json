@@ -1,0 +1,75 @@
+{
+  "name": "webscope",
+  "displayName": "WebScope - Web Preview",
+  "description": "In-editor web browser and preview tool for VS Code. Preview URLs, local HTML files, and web content directly in the editor.",
+  "version": "1.0.0",
+  "publisher": "webscope",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Visualization",
+    "Other"
+  ],
+  "keywords": [
+    "preview",
+    "browser",
+    "webview",
+    "web",
+    "iframe",
+    "html"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "webscope.openWebPreview",
+        "title": "WebScope: Open Web Preview",
+        "category": "WebScope"
+      },
+      {
+        "command": "webscope.previewCurrentFile",
+        "title": "WebScope: Preview Current File",
+        "category": "WebScope"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "webscope.openWebPreview",
+        "key": "ctrl+shift+p",
+        "mac": "cmd+shift+p",
+        "when": "editorFocus"
+      }
+    ]
+  },
+  "activationEvents": [
+    "onCommand:webscope.openWebPreview",
+    "onCommand:webscope.previewCurrentFile"
+  ],
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts",
+    "pretest": "npm run compile && npm run lint",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.0.0",
+    "@types/mocha": "^10.0.0",
+    "@types/node": "16.x",
+    "@types/vscode": "^1.74.0",
+    "@typescript-eslint/eslint-plugin": "^5.40.0",
+    "@typescript-eslint/parser": "^5.40.0",
+    "eslint": "^8.25.0",
+    "glob": "^8.0.3",
+    "mocha": "^10.1.0",
+    "typescript": "^4.8.4",
+    "@vscode/test-electron": "^2.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/webscope.git"
+  }
+}
